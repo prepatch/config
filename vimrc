@@ -40,6 +40,7 @@ nnoremap <leader>u viwU
 inoremap <c-u> <esc>viwUea
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>pb :execute "vsplit " . bufname("#")<cr>
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>2l
