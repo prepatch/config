@@ -6,8 +6,10 @@ set nocompatible
 set number relativenumber
 set nowrap
 set encoding=utf-8
-set wildmode=longest,list,full
+set path+=**
+set wildmenu
 set splitbelow splitright
+set hlsearch incsearch
 
 let mapleader =" "
 let maplocalleader = "\\"
@@ -36,6 +38,7 @@ set laststatus=2
 
 noremap <leader>j ddp
 noremap <leader>k kddpk
+nnoremap <leader>nh :nohlsearch<cr>
 nnoremap <leader>u viwU
 inoremap <c-u> <esc>viwUea
 nnoremap <leader>ev :split $MYVIMRC<cr>
@@ -44,6 +47,10 @@ nnoremap <leader>pb :execute "vsplit " . bufname("#")<cr>
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>2l
+
+" Highlight trailing whitespace
+nnoremap <leader>w :match Errormsg /\v +$/<cr>
+nnoremap <leader>W :match none<cr>
 
 " }}}
 
