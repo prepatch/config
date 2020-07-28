@@ -14,7 +14,7 @@ set hlsearch incsearch
 let mapleader =" "
 let maplocalleader = "\\"
 
-" Plugins ---{{{
+" Plugins {{{
 
 call plug#begin('~/.vim/plugged')
 
@@ -28,16 +28,23 @@ call plug#end()
 
 colorscheme dracula
 
-" Statusline ---{{{
+" Statusline {{{
 
 set laststatus=2
 
 " }}}
 
-" Mappings ---{{{
+" Mappings {{{
 
 noremap <leader>j ddp
 noremap <leader>k kddpk
+" Ctrl-l is appanded to redraw the screen
+" :silent grep  break the theme
+" nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr><c-l>
+" To quickly run through grep matches
+nnoremap <leader>ng :cnext<cr>
+nnoremap <leader>pg :cprevious<cr>
+
 nnoremap <leader>nh :nohlsearch<cr>
 nnoremap <leader>u viwU
 inoremap <c-u> <esc>viwUea
@@ -54,26 +61,27 @@ nnoremap <leader>W :match none<cr>
 
 " }}}
 
-" Abbreviations ---{{{
+" Abbreviations {{{
 
 iabbrev fiel file
 
 " }}}
 
-" FileType-specific settings ---{{{
+" FileType-specific settings {{{
 
-" Vimscript file settings ---{{{
+" Vimscript file settings {{{
 
 augroup filetype_vim
 	autocmd!
 	autocmd FileType vim setlocal foldmethod=marker
 	autocmd FileType vim setlocal foldlevelstart=0
 	autocmd FileType vim nnoremap <buffer> <tab> za
+	autocmd FileType vim nnoremap <buffer> <localleader>co I" <esc>
 augroup END
 
 " }}}
 
-" Python file settings ---{{{
+" Python file settings {{{
 
 augroup filetype_python
 	autocmd!
@@ -83,7 +91,7 @@ augroup END
 
 " }}}
 
-" Haskell file settings ---{{{
+" Haskell file settings {{{
 
 augroup filetype_haskell
 	autocmd!
@@ -92,7 +100,7 @@ augroup END
 
 " }}}
 
-" Text file settings ---{{{
+" Text file settings {{{
 
 augroup filetype_text
 	autocmd!
@@ -102,7 +110,7 @@ augroup END
 
 " }}}
 
-" HTML file settings ---{{{
+" HTML file settings {{{
 
 augroup filetype_html
 	autocmd!
@@ -111,7 +119,7 @@ augroup END
 
 " }}}
 
-" Markdown file settings ---{{{
+" Markdown file settings {{{
 
 augroup filetype_markdown
 	autocmd!
