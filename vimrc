@@ -18,7 +18,7 @@ let maplocalleader = "\\"
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dylanaraps/wal.vim'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 
@@ -26,7 +26,7 @@ call plug#end()
 
 " }}}
 
-colorscheme dracula
+colorscheme wal
 
 " Statusline {{{
 
