@@ -18,15 +18,12 @@ let maplocalleader = "\\"
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'dylanaraps/wal.vim'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
 " }}}
-
-colorscheme wal
 
 " Statusline {{{
 
