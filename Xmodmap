@@ -1,0 +1,31 @@
+! keycode 23 = Tab ISO_Left_Tab Tab ISO_Left_Tab
+! keycode 66 = Caps_Lock NoSymbol Caps_Lock
+! keycode 37 = Control_L NoSymbol Control_L
+! keycode 133 = Super_L NoSymbol Super_L
+!
+! keycode 34 = bracketleft braceleft bracketleft braceleft 
+! keycode 48 = apostrophe quotedbl apostrophe quotedbl
+! keycode 105 = Control_R NoSymbol Control_R
+! keycode 134 = Super_R NoSymbol Super_R
+
+clear Lock
+clear Control
+clear Mod4
+
+! Switch Left Super with Tab
+! and Left Control with Caps Lock
+keycode 23 = Super_L NoSymbol Super_L
+keycode 133 = Tab ISO_Left_Tab Tab ISO_Left_Tab
+keycode 66 = Control_L NoSymbol Control_L
+keycode 37 = Caps_Lock NoSymbol Caps_Lock
+
+! Switch Right Super with Open Bracket
+! and Right Control with Apostrophe
+keycode 34 = Super_R NoSymbol Super_R
+keycode 134 = bracketleft braceleft bracketleft braceleft 
+keycode 48 = Control_R NoSymbol Control_R
+keycode 105 = apostrophe quotedbl apostrophe quotedbl
+
+add Lock = Caps_Lock
+add Control = Control_L Control_R
+add Mod4 = Super_L Super_R

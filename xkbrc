@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# xkbrc
+#
+# One-key function
+
+# Left Control to function as Escape for a single keypress
+xcape -e 'Control_L=Escape'
+
+# Right Control to function as apostrophe for a single keypress
+xcape -e 'Control_R=apostrophe'
+
+# Left Super to function as tab for a single keypress
+xcape -e 'Super_L=Tab'
+
+# Right Super to function as open bracket for a single keypress
+xcape -e 'Super_R=bracketleft'
