@@ -33,10 +33,10 @@ import XMonad.Util.SpawnOnce
 -- certain contrib modules.
 --
 myTerminal :: String
-myTerminal = "alacritty"
+myTerminal = "xfce4-terminal"
 
 myBrowser :: String
-myBrowser = "brave"
+myBrowser = "firefox"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -94,10 +94,10 @@ myKeys = \conf -> mkKeymap conf $
     , ("M-w", spawn "rofi -show window")
 
     -- launch a browser
-    ,("M-b", spawn "brave")
+    , ("M-b", spawn myBrowser)
 
     -- close focused window
-    , ("M-S-c", kill)
+    , ("M-c", kill)
 
      -- Rotate through the available layout algorithms
     , ("M-<Space>", sendMessage NextLayout)
@@ -107,9 +107,6 @@ myKeys = \conf -> mkKeymap conf $
 
     -- Resize viewed windows to the correct size
     , ("M-n", refresh)
-
-    -- Move focus to the next window
-    , ("M1-<Tab>", windows W.focusDown)
 
     -- Move focus to the next window
     , ("M-j", windows W.focusDown)
@@ -147,7 +144,7 @@ myKeys = \conf -> mkKeymap conf $
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
-    , ("M-f", sendMessage ToggleStruts)
+    -- , ("M-f", sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ("M-S-q", io (exitWith ExitSuccess))
@@ -159,8 +156,8 @@ myKeys = \conf -> mkKeymap conf $
     , ("M-S-l", spawn "betterlockscreen -l blur")
 
     -- Workspace navigation
-    , ("M-<Tab>", nextWS)
-    , ("M-S-<Tab>", prevWS)
+    , ("M-C-l", nextWS)
+    , ("M-C-h", prevWS)
 
     -- Scratchpads
     , ("M-C-<Return>", namedScratchpadAction myScratchpads "terminal")
@@ -175,6 +172,16 @@ myKeys = \conf -> mkKeymap conf $
 
     -- Treeselect
     ,("M-S-t", tsAction tsConfig)
+
+    -- Show time and date
+    ,("M-x d", spawn "notify-send \"$(date +\"%+4Y/%m/%d %a %H:%M\")\"")
+
+    -- Show battery information
+    ,("M-x b", spawn "notify-send \"$(acpi)\"")
+    -- Pulse Audio controls
+    ,("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume 0 +5%")
+    ,("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume 0 -5%")
+    ,("<XF86AudioMute>", spawn "pactl set-sink-mute 0 toggle")
     ]
 
 ------------------------------------------------------------------------
@@ -276,10 +283,9 @@ myLogHook = return()
 --
 -- By default, do nothing.
 myStartupHook = do
-    spawnOnce "nitrogen --restore &"
+    spawnOnce "~/.fehbg &"
     spawnOnce "picom &"
     spawnOnce "nm-applet &"
-    spawnOnce "volumeicon &"
     spawnOnce "xfce4-power-manager"
     spawnOnce "/home/hb/.config/xkbrc"
 
@@ -290,7 +296,6 @@ myStartupHook = do
 --
 
 main = do
-    xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
     xmonad $ ewmh defaults
 
 -- A structure containing your configuration settings, overriding
@@ -331,7 +336,7 @@ myScratchpads = [ NS "terminal" spawnTerm findTerm manageTerm
                 , NS "music" spawnMusicPlayer findMusicPlayer manageMusicPlayer
                 ]
     where
-      spawnTerm  = myTerminal ++ " -t scratchpadTerminal"
+      spawnTerm  = myTerminal ++ " -T scratchpadTerminal"
       findTerm   = title =? "scratchpadTerminal"
       manageTerm = customFloating $ W.RationalRect l t w h
                  where
@@ -339,7 +344,7 @@ myScratchpads = [ NS "terminal" spawnTerm findTerm manageTerm
                    w = 0.9
                    t = 0.95 -h
                    l = 0.95 -w
-      spawnMusicPlayer  = myTerminal ++ " -t scratchpadMusic -e cmus"
+      spawnMusicPlayer  = myTerminal ++ " -T scratchpadMusic -e cmus"
       findMusicPlayer   = title =? "scratchpadMusic"
       manageMusicPlayer = customFloating $ W.RationalRect l t w h
                         where

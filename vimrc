@@ -1,5 +1,7 @@
 " >^.^< "
 
+" Basics {{{
+
 syntax on
 filetype plugin on
 set nocompatible
@@ -14,16 +16,21 @@ set hlsearch incsearch
 let mapleader =" "
 let maplocalleader = "\\"
 
+" }}}
+
 " Plugins {{{
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
 " }}}
+
+colorscheme dracula
 
 " Statusline {{{
 
