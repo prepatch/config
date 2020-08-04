@@ -12,13 +12,14 @@ import System.IO
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-import XMonad.Actions.CycleWS
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
+
+import XMonad.Actions.CycleWS (nextWS, prevWS, shiftToNext, shiftToPrev)
 import XMonad.Actions.Submap
 import XMonad.Actions.TreeSelect as TS
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageDocks (ToggleStruts(..), docks, avoidStruts)
 import XMonad.Hooks.WorkspaceHistory
 
 import XMonad.Util.EZConfig (mkKeymap)
@@ -158,6 +159,8 @@ myKeys = \conf -> mkKeymap conf $
     -- Workspace navigation
     , ("M-C-l", nextWS)
     , ("M-C-h", prevWS)
+    , ("M-M1-l", shiftToNext)
+    , ("M-M1-h", shiftToPrev)
 
     -- Scratchpads
     , ("M-C-<Return>", namedScratchpadAction myScratchpads "terminal")
@@ -216,7 +219,7 @@ myMouseBindings conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = smartBorders tiled ||| Mirror tiled ||| noBorders Full
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -304,7 +307,7 @@ main = do
 --
 -- No need to modify this.
 --
-defaults = docks def {
+defaults = def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
